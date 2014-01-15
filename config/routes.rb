@@ -3,6 +3,7 @@ Bettergram::Application.routes.draw do
   get "oauth/callback" => "o_auth#callback", :as => :callback
   get "oauth/connect" =>  "o_auth#connect", :as => :connect
   resource :session, :only => [:create, :new, :destroy]
+  resources :users, :only => [:create, :new]
 
   root :to => "root#index"
 end

@@ -8,6 +8,20 @@
 </head>
 <body>
 
+<ul>
+  <% [:errors, :messages].each do |message_type| %>
+    <% next if flash[message_type].nil? %>
+    <% flash[message_type].each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<% if logged_in? %>
+  <%= current_user.username %>
+  <%= link_to "Log out", session_url, :method => :delete %>
+<% end %>
+
 <%= yield %>
 
 </body>

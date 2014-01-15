@@ -19,5 +19,6 @@ module SessionsHelper
   end
 
   def require_current_user
+    redirect_to new_session_url unless logged_in?
   end
 end
