@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_filter :require_no_current_user, :except => [:destroy]
   def new
     @user = User.new
     render :new
@@ -12,7 +13,7 @@ class SessionsController < ApplicationController
     if @user
       flash[:messages] = ["Logged in successfully!"]
       login!(@user)
-      redirect_to root_url
+      redirect_to connect_url
     else
       flash.now[:errors] = ["Invalid username or password!"]
       @user = User.new(user_info)
