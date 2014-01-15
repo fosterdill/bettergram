@@ -51,8 +51,18 @@ GEM
     ejs (1.1.1)
     erubis (2.7.0)
     execjs (2.0.2)
+    faraday (0.8.9)
+      multipart-post (~> 1.2.0)
+    faraday_middleware (0.9.0)
+      faraday (>= 0.7.4, < 0.9)
+    hashie (2.0.5)
     hike (1.2.3)
     i18n (0.6.9)
+    instagram (0.10.0)
+      faraday (>= 0.7, < 0.9)
+      faraday_middleware (~> 0.8)
+      hashie (>= 0.4.0)
+      multi_json (~> 1.0, >= 1.0.3)
     journey (1.0.4)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
@@ -63,6 +73,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     multi_json (1.8.4)
+    multipart-post (1.2.0)
     pg (0.17.0)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -117,6 +128,8 @@ DEPENDENCIES
   backbone-on-rails
   bcrypt-ruby
   coffee-rails (~> 3.2.1)
+  ejs
+  instagram
   jquery-rails
   pg
   rails (= 3.2.15)
