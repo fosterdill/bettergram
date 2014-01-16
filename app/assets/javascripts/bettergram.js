@@ -4,6 +4,9 @@ window.Bettergram = {
   Views: {},
   Routers: {},
   initialize: function() {
+    Bettergram.photos = new Bettergram.Collections.Photos();
+    new Bettergram.Routers.PhotosRouter({ rootEl: $('#content') });
+    Backbone.history.start();
   }
 };
 

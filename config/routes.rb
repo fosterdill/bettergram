@@ -5,7 +5,7 @@ Bettergram::Application.routes.draw do
   resource :session, :only => [:create, :new, :destroy]
   resources :users, :only => [:create, :new]
   namespace :api do
-    resources :photos, :only => [:index]
+    resources :photos, :only => [:index, :show]
   end
 
   root :to => "root#index"
