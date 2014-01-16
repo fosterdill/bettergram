@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<%= render 'layouts/navbar' %>
+
 <ul>
   <% [:errors, :messages].each do |message_type| %>
     <% next if flash[message_type].nil? %>
@@ -17,10 +19,6 @@
   <% end %>
 </ul>
 
-<% if logged_in? %>
-  <%= current_user.username %>
-  <%= link_to "Log out", session_url, :method => :delete %>
-<% end %>
 
 <%= yield %>
 

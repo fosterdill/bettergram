@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   before_filter :require_no_current_user, :except => [:destroy]
+
   def new
     @user = User.new
     render :new

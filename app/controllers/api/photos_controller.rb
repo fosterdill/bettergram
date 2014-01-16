@@ -1,6 +1,10 @@
 class Api::PhotosController < ApplicationController
   def index
-    @photos = current_instagram_client.user_media_feed
+    if (has_client?)
+      @photos = current_instagram_client.user_media_feed
+    else
+      @photos = current_instagram_client.media_popular
+    end
     render :json => @photos
   end
 
