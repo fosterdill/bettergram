@@ -15,7 +15,7 @@ Bettergram.Routers.PhotosRouter = Backbone.Router.extend({
         var photosIndex = new Bettergram.Views.PhotosIndex({ 
           collection: Bettergram.photos
         });
-        that._swapView(photosIndex.render().$el);
+        that._swapView(photosIndex);
       }
     });
   },
@@ -24,7 +24,7 @@ Bettergram.Routers.PhotosRouter = Backbone.Router.extend({
     var that = this;
     this._getPhoto(id, function (photo) {
       var photoShow = new Bettergram.Views.PhotoShow({ model: photo });
-      that._swapView(photoShow.render().$el);
+      that._swapView(photoShow);
     });
   },
 
@@ -44,7 +44,7 @@ Bettergram.Routers.PhotosRouter = Backbone.Router.extend({
     }
   },
 
-  _swapView: function () {
+  _swapView: function (view) {
     this._currentView && this._currentView.remove();
     this._currentView = view;
     this.$rootEl.html(view.render().$el);
