@@ -1,5 +1,9 @@
 class OAuthController < ApplicationController
-  CALLBACK_URL = 'http://localhost:3000/oauth/callback'
+  if Rails.env == 'development'
+    CALLBACK_URL = 'http://localhost:3000/oauth/callback'
+  elsif Rails.env == 'production'
+    CALLBACK_URL = 'http://www.bettergram.com/oauth/callback'
+  end
 
   def callback
     response = Instagram.get_access_token(params[:code], 
