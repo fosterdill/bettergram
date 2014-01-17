@@ -40,7 +40,11 @@
     <% if logged_in? %>
       <li class="dropdown">
       <a id="profile-picture-container" href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <img class="img-circle" id="profile-picture" src="<%= current_instagram_client.user.profile_picture %>">
+        <% if has_client? %>
+          <img class="img-circle" id="profile-picture" src="<%= current_instagram_client.user.profile_picture %>">
+        <% else %>
+          <span style="display: inline-block; padding-top: 10px"><%= current_user.username %></span>
+        <% end %>
 <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <% if !has_client? %>
