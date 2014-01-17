@@ -2,7 +2,8 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
   template: JST['photos/index'],
 
   events: {
-    'scroll window': 'scrollHandler'
+    'scroll window': 'scrollHandler',
+    'click img.rounded-picture': 'showPictureModal'
   },
 
   initialize: function () {
@@ -18,6 +19,22 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
     this.collection.each(this._addRows.bind(this));
     this.$el.append(this.$rowEl);
     return this;
+  },
+
+  showPictureModal: function (event) {
+    event.preventDefault();
+    var id = $(event.target).data('id');
+    var photo = new Bettergram.Models.Photo({ id: id });
+    var that = this;
+    photo.collection = new Bettergram.Collections.Photos();
+    var $modal = $('.modal');
+    photo.fetch({
+      success: function () {
+        var showView = new Bettergram.Views.PhotoShow({ model: photo });
+        $modal.find('.modal-body').html(showView.render().$el);
+        $modal.modal();
+      }
+    });
   },
 
   scrollHandler: function (event) {

@@ -2,9 +2,9 @@
   <% photos.each(function (photo, index) { %>
     <div class="col-md-4 text-center">
       <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="photo-thumb panel-body">
           <a href="#/photos/<%= photo.get('id') %>">
-            <img class="rounded-picture" src="<%= photo.get('images').low_resolution.url %>">
+            <img data-id="<%= photo.get('id') %>" class="rounded-picture" src="<%= photo.get('images').low_resolution.url %>">
           </a>
         </div>
       </div>
