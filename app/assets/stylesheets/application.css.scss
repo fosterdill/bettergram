@@ -11,5 +11,14 @@
  *= require_self
  *= require_tree .
  */
-
+// $navbar-default-bg: purple;
 @import "bootstrap";
+#profile-picture {
+  width: 40px;
+  height: 40px;
+}
+#profile-picture-container {
+  padding: 0px;
+  padding-top:5px;
+  padding-left:10px;
+}
