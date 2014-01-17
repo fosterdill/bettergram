@@ -1,7 +1,8 @@
 class Api::PhotosController < ApplicationController
   def index
     if (has_client?)
-      @photos = current_instagram_client.user_media_feed;
+      options = params[:max_id] ? {:max_id => params[:max_id]} : {}
+      @photos = current_instagram_client.user_media_feed(options)
     else
       @photos = current_instagram_client.media_popular
     end
