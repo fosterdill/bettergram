@@ -1,1 +1,24 @@
-<img src="<%= photo.get('images').standard_resolution.url %>">
+
+<!-- <div class="modal&#45;header"> -->
+<!--   <button type="button" class="close" data&#45;dismiss="modal" aria&#45;hidden="true">&#38;times;</button> -->
+<!--   <!&#45;&#45; <h4 class="modal&#38;#45;title">Title</h4> &#45;&#45;> -->
+<!-- </div> -->
+<div class="modal-body">
+  <div class="row">
+    <div id="image-area" class="col-xs-6">
+      <img src="<%= photo.get('images').standard_resolution.url %>">
+    </div>
+    <div id="comment-area" class=" col-xs-5 col-xs-offset-1">
+      <h2>Comments (<%= photo.get('comments').length %>):</h2>
+      <% photo.get('comments').each(function (comment) { %>
+        <ul>
+          <li><%= comment.get('from').username %>: <%= comment.get('text') %></li>
+        </ul>
+      <% }); %>
+    </div>
+  </div>
+</div>
+<!-- <div class="modal&#45;footer"> -->
+<!--   <!&#45;&#45; <button type="button" class="btn btn&#38;#45;default" data&#38;#45;dismiss="modal">Close</button> &#45;&#45;> -->
+<!--   <!&#45;&#45; <button type="button" class="btn btn&#38;#45;primary">Save changes</button> &#45;&#45;> -->
+<!-- </div> -->

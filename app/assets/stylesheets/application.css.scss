@@ -20,6 +20,14 @@ body {
   background-repeat:repeat;
 }
 
+.modal {
+  overflow-y: auto;
+}
+
+.modal-open {
+  overflow: auto;
+}
+
 .photo-thumb {
   background: #f9f9f9;
   opacity: .9;
@@ -43,4 +51,7 @@ body {
   padding: 0px;
   background-image: url(debut_light.png);
   background-repeat:repeat;
+}
+#comment-area {
+  padding-top: 20px;
 }
