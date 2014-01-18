@@ -31,7 +31,7 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
     photo.fetch({
       success: function () {
         var showView = new Bettergram.Views.PhotoShow({ model: photo });
-        $modal.find('.modal-body').html(showView.render().$el);
+        $modal.find('#image-area').html(showView.render().$el);
         $modal.modal();
       }
     });
