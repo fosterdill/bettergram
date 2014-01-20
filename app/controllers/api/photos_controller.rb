@@ -15,11 +15,11 @@ class Api::PhotosController < ApplicationController
   end
 
   def test
-    $redis.set('dylan', 'hi')
+    REDIS.set('dylan', 'hi')
     render :json => 'done'
   end
 
   def gettest
-    render :json => $redis.get('dylan')
+    render :json => REDIS.get('dylan')
   end
 end
