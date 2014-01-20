@@ -13,4 +13,13 @@ class Api::PhotosController < ApplicationController
     @photo = current_instagram_client.media_item(params[:id])
     render :json => @photo
   end
+
+  def test
+    $redis.set('dylan', 'hi')
+    render :json => 'done'
+  end
+
+  def gettest
+    render :json => $redis.get('dylan')
+  end
 end

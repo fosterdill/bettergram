@@ -7,7 +7,7 @@ development:
   adapter: postgresql
   database: bettergram_dev
   pool: 5
-  username: ENV['USERNAME']
-  password: ENV['PASSWORD']
+  username: <%= ENV['USERNAME'] %>
+  password: <%= ENV['PASSWORD'] %>
   timeout: 5000
 
