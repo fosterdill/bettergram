@@ -18,7 +18,15 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
   render: function () {
     this.collection.each(this._addRows.bind(this));
     this.$el.append(this.$rowEl);
+    this.preloadImages();
     return this;
+  },
+
+  preloadImages: function () {
+    this.collection.each(function (photo) {
+      var image = new Image();
+      image.src = photo.get('images').standard_resolution.url;
+    });
   },
 
   showPictureModal: function (event) {
