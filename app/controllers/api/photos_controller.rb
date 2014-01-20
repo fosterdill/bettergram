@@ -1,17 +1,38 @@
 class Api::PhotosController < ApplicationController
   def index
     if (has_client?)
-      options = params[:max_id] ? {:max_id => params[:max_id]} : {}
-      @photos = current_instagram_client.user_media_feed(options)
+      if (is_first_fetch?)
+        @photos = current_instagram_client.user_media_feed()
+
+        Thread.new do 
+          next_photos = current_instagram_client.user_media_feed({ 
+            max_id: @photos.last().id
+          })
+          REDIS.set('photos', next_photos.to_json)
+        end
+        render :json => @photos
+      else
+        @photos = REDIS.get('photos')
+        Thread.new do
+          REDIS.set('photos',  current_instagram_client.user_media_feed({ 
+            max_id: JSON.parse(@photos).last()[:id]
+          }).to_json);
+        end
+        render :json => @photos
+      end
     else
       @photos = current_instagram_client.media_popular
+      render :json => @photos
     end
-    render :json => @photos
   end
 
   def show
     @photo = current_instagram_client.media_item(params[:id])
     render :json => @photo
+  end
+
+  def is_first_fetch?
+    !params[:max_id]
   end
 
   def test
