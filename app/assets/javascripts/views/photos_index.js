@@ -53,7 +53,9 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
 
   addPhotos: function () {
     var newPhotos = new Bettergram.Collections.Photos();
-    $lastRow = $('[data-id="' + this.lastId + '"]').hide();
+    if (this.rows.last() && (this.lastId !== this.rows.last().get('id'))) {
+      $('[data-id="' + this.lastId + '"]').hide();
+    }
     var that = this;
     newPhotos.url = "/api/photos?max_id=" + this.lastId;
     newPhotos.fetch({
