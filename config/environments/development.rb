@@ -34,4 +34,6 @@ Bettergram::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # ENV["REDISTOGO_URL"] = "redis://#{ENV['USERNAME']}:#{ENV['PASSWORD']}@localhost:6389"
 end

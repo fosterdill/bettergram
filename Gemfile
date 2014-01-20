@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'redis'
 gem 'rails', '3.2.15'
 gem 'kaminari'
 gem 'figaro'
