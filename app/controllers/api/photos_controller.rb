@@ -1,31 +1,21 @@
+require 'pp'
 class Api::PhotosController < ApplicationController
   def index
     if (has_client?)
       if (is_first_fetch?)
-        @photos = current_instagram_client.user_media_feed()
+        @photos = current_instagram_client.user_media_feed().to_json
         session[:redis_token] ||= SecureRandom.urlsafe_base64
-
-        Thread.new do
-          next_photos = current_instagram_client.user_media_feed(
-            max_id: @photos.last.id
-          )
-          REDIS.set("photos#{session[:redis_token]}", next_photos.to_json)
-        end
-        render :json => @photos
       else
-        @photos = []
-        JSON.parse(REDIS.get("photos#{session[:redis_token]}")).each do |obj|
-          @photos << Hashie::Mash.new(obj)
-        end
-
-        Thread.new do
-          next_photos = current_instagram_client.user_media_feed( 
-            max_id: @photos.last.id
-          )
-          REDIS.set("photos#{session[:redis_token]}", next_photos.to_json)
-        end
-        render :json => @photos
+        @photos = REDIS.get("photos#{session[:redis_token]}")
       end
+
+      store_next_batch(@photos)
+      # if (params[:max_id]) 
+      #   @photos = current_instagram_client.user_media_feed(:max_id => params[:max_id])
+      # else
+      #   @photos = current_instagram_client.user_media_feed()
+      # end
+      render :json => @photos
     else
       @photos = current_instagram_client.media_popular
       render :json => @photos
@@ -37,16 +27,4 @@ class Api::PhotosController < ApplicationController
     render :json => @photo
   end
 
-  def is_first_fetch?
-    !params[:max_id]
-  end
-
-  def test
-    REDIS.set('dylan', 'hi')
-    render :json => 'done'
-  end
-
-  def gettest
-    render :json => REDIS.get('dylan')
-  end
 end
