@@ -9,7 +9,7 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
 
     this.on('addPhotos', this.render);
     this.rows = new Bettergram.Collections.Photos();
-    this.throttled = _.throttle(this.addPhotos.bind(this), 2000);
+    this.throttled = _.throttle(this.addPhotos.bind(this), 2000); 
   },
 
   render: function () {
@@ -65,12 +65,9 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
 
   addPhotos: function () {
     var that = this;
-    // console.log(this.collection);
-    var id = this.collection.last().get('id');
     this.collection.fetch({
-      data: { max_id: this.collection.last().get('id') },
+      data: { max_id: 5 },
       success: function () {
-    //    that.collection.remove(that.collection.first());
         that.trigger('addPhotos');
       }
     });
