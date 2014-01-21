@@ -49,7 +49,7 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
   scrollHandler: function (event) {
     var scrollPos = $(window).scrollTop();
     var scrollMax = $(document).height() - $(window).height();
-    if ((scrollMax - scrollPos < 100) && (this.shouldLoadPhotos)) {
+    if ((scrollMax - scrollPos < 150) && (this.shouldLoadPhotos)) {
       this.addPhotos();
       this.shouldLoadPhotos = false;
       setTimeout(this.okToLoadPhotos.bind(this), 2000);
