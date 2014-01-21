@@ -26,7 +26,6 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
     this.collection.each(function (photo) {
       var image = new Image();
       image.src = photo.get('images').standard_resolution.url;
-      console.log("Preloading: " + photo.get('images').standard_resolution.url);
     });
   },
 
@@ -49,7 +48,7 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
   scrollHandler: function (event) {
     var scrollPos = $(window).scrollTop();
     var scrollMax = $(document).height() - $(window).height();
-    if ((scrollMax - scrollPos < 150) && (this.shouldLoadPhotos)) {
+    if ((scrollMax - scrollPos < 250) && (this.shouldLoadPhotos)) {
       this.addPhotos();
       this.shouldLoadPhotos = false;
       setTimeout(this.okToLoadPhotos.bind(this), 2000);
