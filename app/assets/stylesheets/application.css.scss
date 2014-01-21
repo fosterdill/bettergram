@@ -11,6 +11,7 @@
  *= require_self
  *= require_tree .
  */
+$jumbotron-bg: rgba(5, 0, 0, .05);
 $navbar-default-bg: #f1f7f6;
 $navbar-default-brand-hover-bg: #f9f9f7; 
 @import "bootstrap";
@@ -18,6 +19,10 @@ body {
   margin-top: 70px;
   background-image: url(debut_light.png);
   background-repeat:repeat;
+}
+
+.user-show-font {
+  font-family: "Averia Sans Libre";
 }
 
 .modal {
