@@ -3,12 +3,13 @@ class Api::PhotosController < ApplicationController
     if (has_client?)
       if (is_first_fetch?)
         @photos = current_instagram_client.user_media_feed()
-        session[:redis_token] = SecureRandom.urlsafe_base64
+        session[:redis_token] ||= SecureRandom.urlsafe_base64
 
-        Thread.new do 
+        Thread.new do
           next_photos = current_instagram_client.user_media_feed(
             max_id: @photos.last.id
           )
+          session[:last_id] = next_photos.last.id
           REDIS.set("photos#{session[:redis_token]}", next_photos.to_json)
         end
         render :json => @photos
@@ -17,9 +18,10 @@ class Api::PhotosController < ApplicationController
 
         Thread.new do
           next_photos = current_instagram_client.user_media_feed( 
-            max_id: @photos.last.id
+            max_id: session[:last_id]
           )
-          REDIS.set("photos#{session[:redis_token]}", next_photos.to_json);
+          session[:last_id] = next_photos.last.id
+          REDIS.set("photos#{session[:redis_token]}", next_photos.to_json)
         end
         render :json => @photos
       end
