@@ -14,12 +14,12 @@ class Api::PhotosController < ApplicationController
         render :json => @photos
       else
         @photos = JSON.parse(REDIS.get("photos#{session[:redis_token]}"))
+
         Thread.new do
-          REDIS.set("photos#{session[:redis_token]}",
-                    current_instagram_client.user_media_feed( 
-                      max_id: @photos.last.id
-                    ).to_json
-          );
+          next_photos = current_instagram_client.user_media_feed( 
+            max_id: @photos.last.id
+          )
+          REDIS.set("photos#{session[:redis_token]}", next_photos.to_json);
         end
         render :json => @photos
       end
