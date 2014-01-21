@@ -1,4 +1,3 @@
-require 'pp'
 class Api::PhotosController < ApplicationController
   def index
     if (has_client?)

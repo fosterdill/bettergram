@@ -8,6 +8,7 @@ Bettergram::Application.routes.draw do
     get 'test' => 'photos#test'
     get 'gettest' => 'photos#gettest'
     resources :photos, :only => [:index, :show]
+    resources :users, :only => [:show]
   end
 
   root :to => "root#index"
