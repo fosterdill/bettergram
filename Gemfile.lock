@@ -137,6 +137,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   ejs
   figaro
+  hashie
   instagram
   jquery-rails
   kaminari
