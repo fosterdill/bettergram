@@ -9,18 +9,19 @@ class Api::PhotosController < ApplicationController
           next_photos = current_instagram_client.user_media_feed(
             max_id: @photos.last.id
           )
-          session[:last_id] = next_photos.last.id
           REDIS.set("photos#{session[:redis_token]}", next_photos.to_json)
         end
         render :json => @photos
       else
-        @photos = JSON.parse(REDIS.get("photos#{session[:redis_token]}"))
+        @photos = []
+        JSON.parse(REDIS.get("photos#{session[:redis_token]}")).each do |obj|
+          @photos << Hashie::Mash.new(obj)
+        end
 
         Thread.new do
           next_photos = current_instagram_client.user_media_feed( 
-            max_id: session[:last_id]
+            max_id: @photos.last.id
           )
-          session[:last_id] = next_photos.last.id
           REDIS.set("photos#{session[:redis_token]}", next_photos.to_json)
         end
         render :json => @photos

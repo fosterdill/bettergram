@@ -4,6 +4,7 @@ gem 'redis'
 gem 'rails', '3.2.15'
 gem 'kaminari'
 gem 'figaro'
+gem 'hashie'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
