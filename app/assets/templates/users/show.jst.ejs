@@ -1,38 +1,16 @@
 <div class="jumbotron ">
   <div class="container user-show-font">
     <div class="row">
-      <div class="col-xs-4">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-          <!-- Indicators -->
-          <!-- <ol class="carousel&#45;indicators"> -->
-          <!--   <% user.get('posts').each(function (post, index) { %> -->
-          <!--     <li  -->
-          <!--       data&#45;target="#carousel&#45;example&#45;generic"  -->
-          <!--       data&#45;slide&#45;to="<%= index %>"  -->
-          <!--       <% if(index === 0) { %> -->
-          <!--         <%= 'class="active"' %> -->
-          <!--       <% } %>></li> -->
-          <!--   <% }); %> -->
-          <!-- </ol> -->
-
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner" style="border-radius: 5px">
-            <% user.get('posts').each(function (post, index) { %>
-              <div class="item <%= index === 0 ? 'active' : '' %> ">
-                <img class="text-center" style="border-radius: 5px;width: 100%" src="<%= post.get('images').low_resolution.url %>">
-                <div class="carousel-caption">
-                </div>
-              </div>
-            <% }); %>
-          </div>
-
-          <!-- Controls -->
-          <a class="left carousel-control" style="border-radius: 5px" href="#carousel-example-generic" data-slide="prev">
-            <!-- <span class="glyphicon glyphicon&#45;chevron&#45;left"></span> -->
-          </a>
-          <a class="right carousel-control" style="border-radius: 5px" href="#carousel-example-generic" data-slide="next">
-            <!-- <span class="glyphicon glyphicon&#45;chevron&#45;right"></span> -->
-          </a>
+      <div class="col-xs-3">
+        <h1><img class="img-rounded" src="<%= user.get('profile_picture') %>"><%= user.get('username') %></h1>
+        <ul>
+          <li><h3>Followers: <%= user.get('counts').followed_by %></h3></li>
+          <li><h3>Following: <%= user.get('counts').follows %></h3></li>
+          <li><h3>Posted Photos: <%= user.get('counts').media %></h3></li>
+        </ul>
+      </div>
+      <div class="col-xs-offset-1 col-xs-8">
+        <div id="user-photos">
         </div>
       </div>
     </div>
