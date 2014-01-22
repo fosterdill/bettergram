@@ -8,7 +8,9 @@ class Api::PhotosController < ApplicationController
         @photos = REDIS.get("photos#{session[:redis_token]}")
       end
 
-      store_next_batch(@photos)
+      Thread.new do
+        store_next_batch(@photos)
+      end
       # if (params[:max_id]) 
       #   @photos = current_instagram_client.user_media_feed(:max_id => params[:max_id])
       # else

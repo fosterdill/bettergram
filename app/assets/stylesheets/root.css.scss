@@ -1,6 +1,10 @@
 // Place all the styles related to the Root controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.rounded-picture {
-  border-radius: 5px;
+.picture-list-item {
+  list-style-type: none;
+}
+
+.img-margin {
+  margin: 17px;
 }

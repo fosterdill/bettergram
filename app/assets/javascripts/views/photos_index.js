@@ -1,6 +1,6 @@
 Bettergram.Views.PhotosIndex = Backbone.View.extend({
   events: {
-    'click img.rounded-picture': 'showPictureModal'
+    'click img.img-thumbnail': 'showPictureModal'
   },
 
   template: JST['photos/index'],
@@ -8,6 +8,8 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
   initialize: function () {
     _.bindAll(this, 'scrollHandler');
     $(window).scroll(this.scrollHandler);
+
+    this.listenTo(this.collection, 'add', this.addPhoto);
   },
 
   render: function () {
@@ -16,7 +18,18 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
     return this;
   },
 
-  preloadImages: function () {
+  addPhoto: function (photo) {
+    $('#photos').append('<li class="picture-list-item"><a href="#"><img data-id="' + 
+                        photo.id + 
+                        '" class="pull-left img-margin img-thumbnail" src="' + 
+                        photo.get('images').low_resolution.url +
+                        '"></a></li>');
+    this.preloadImage(photo);
+  },
+
+  preloadImage: function (photo) {
+    var image = new Image();
+    image.src = photo.get('images').standard_resolution.url;
   },
 
   showPictureModal: function (event) {
@@ -36,6 +49,13 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
   },
 
   scrollHandler: function (event) {
-    console.log('scroll handles');
+    if (document.body.scrollHeight == 
+        document.body.scrollTop +        
+        window.innerHeight) {
+      this.collection.fetch({
+        data: {max_id: 1},
+        reset: false
+      });
+    }
   }
 });

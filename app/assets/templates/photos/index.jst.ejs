@@ -1,7 +1,9 @@
 <ul id="photos">
   <% photos.each(function (photo, index) { %>
-    <li>
-      <img src="<%= photo.get('images').low_resolution.url %>">
+    <li class="picture-list-item">
+    <a href="#">
+      <img data-id="<%= photo.id %>" class="pull-left img-thumbnail img-margin" src="<%= photo.get('images').low_resolution.url %>">
+    </a>
     </li>
   <% }); %>
 </ul>
