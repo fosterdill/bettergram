@@ -3,16 +3,13 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
     'click .img-thumbnail': 'showPictureModal'
   },
 
-  template: JST['photos/index'],
-  
   initialize: function () {
     _.bindAll(this, 'scrollHandler');
     $(window).scroll(this.scrollHandler);
     var that = this;
 
-    this.collection.each(function (photo) {
-      that.preloadImage(photo);
-    });
+    this.$modal = $('.modal');
+    this.$ul = $('<ul id="photos">');
     this.listenTo(this.collection, 'add', this.addPhoto);
     this.throttledFetch = _.throttle(this.fetchPhotos.bind(this), 1000);
   },
@@ -26,17 +23,14 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
 
   render: function () {
     var that = this;
-    var renderedContent = this.template({ photos: this.collection });
-    this.$el.html(renderedContent);
+    this.$el.html(this.$ul);
+    this.collection.each(function(photo) { that.addPhoto(photo); });
     return this;
   },
 
   addPhoto: function (photo) {
-    $('#photos').append('<li class="picture-list-item"><a href="#"><img data-id="' + 
-                        photo.id + 
-                        '" class="pull-left img-margin img-thumbnail" src="' + 
-                        photo.get('images').low_resolution.url +
-                        '"></a></li>');
+    var detailView = new Bettergram.Views.PhotoDetail({ model: photo });
+    this.$ul.append(detailView.render().$el);
     this.preloadImage(photo);
   },
 
@@ -48,13 +42,10 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
   showPictureModal: function (event) {
     event.preventDefault();
     var id = $(event.target).data('id');
-    console.log(id);
     var photo = Bettergram.photos.get(id);
-    console.log(photo);
-    var $modal = $('.modal');
     var showView = new Bettergram.Views.PhotoShow({ model: photo });
-    $modal.find('.modal-content').html(showView.render().$el);
-    $modal.modal();
+    this.$modal.find('.modal-content').html(showView.render().$el);
+    this.$modal.modal();
   },
 
   scrollHandler: function (event) {
