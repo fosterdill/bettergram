@@ -5,8 +5,10 @@ window.Bettergram = {
   Routers: {},
   initialize: function() {
     Bettergram.photos = new Bettergram.Collections.Photos();
-    new Bettergram.Routers.PhotosRouter({ rootEl: $('#content') });
-    new Bettergram.Routers.UsersRouter({ rootEl: $('#content') });
+    var rootEl = $('#content');
+    new Bettergram.Routers.PhotosRouter({ rootEl: rootEl });
+    new Bettergram.Routers.UsersRouter({ rootEl: rootEl });
+    new Bettergram.Routers.SearchRouter({ rootEl: rootEl });
     Backbone.history.start();
   }
 };
