@@ -15,9 +15,9 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
-      <li><a href="/#/">Feed</a></li>
+      <li id="feed-menu-button"><a href="/#/">Feed</a></li>
       <% if has_client? %>
-        <li><a href="/#/users/<%= current_instagram_client.user.id %>">Profile</a></li>
+        <li id="profile-menu-button"><a href="/#/users/<%= current_instagram_client.user.id %>">Profile</a></li>
       <% end %>
       <!-- <li class="dropdown"> -->
       <!--   <a href="#" class="dropdown&#45;toggle" data&#45;toggle="dropdown">Dropdown <b class="caret"></b></a> -->

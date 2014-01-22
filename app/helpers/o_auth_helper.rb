@@ -19,7 +19,9 @@ module OAuthHelper
 
   def cache_user_info
     session[:redis_token] ||= SecureRandom.urlsafe_base64
+    user = current_instagram_client.user;
+    user[:posts] = current_instagram_client.user_recent_media;
     REDIS.set("user_info#{session[:redis_token]}", 
-              current_instagram_client.user.to_json)
+              user.to_json)
   end
 end

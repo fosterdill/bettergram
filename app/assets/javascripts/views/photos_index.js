@@ -22,6 +22,8 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
   }, 
 
   render: function () {
+    $('li.active').removeClass('active');
+    $('#feed-menu-button').addClass('active');
     var that = this;
     this.$el.html(this.$ul);
     this.collection.each(function(photo) { that.addPhoto(photo); });
