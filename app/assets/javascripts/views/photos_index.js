@@ -1,6 +1,6 @@
 Bettergram.Views.PhotosIndex = Backbone.View.extend({
   events: {
-    'click img.img-thumbnail': 'showPictureModal'
+    'click .img-thumbnail': 'showPictureModal'
   },
 
   template: JST['photos/index'],
@@ -8,17 +8,26 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
   initialize: function () {
     _.bindAll(this, 'scrollHandler');
     $(window).scroll(this.scrollHandler);
+    var that = this;
 
+    this.collection.each(function (photo) {
+      that.preloadImage(photo);
+    });
     this.listenTo(this.collection, 'add', this.addPhoto);
+    this.throttledFetch = _.throttle(this.fetchPhotos.bind(this), 2000);
   },
+
+  fetchPhotos: function () {
+    this.collection.fetch({
+      data: {max_id: 1},
+      remove: false
+    });
+  }, 
 
   render: function () {
     var that = this;
     var renderedContent = this.template({ photos: this.collection });
     this.$el.html(renderedContent);
-    this.collection.each( function (photo) {
-      that.preloadImage(photo);
-    });
     return this;
   },
 
@@ -39,27 +48,21 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
   showPictureModal: function (event) {
     event.preventDefault();
     var id = $(event.target).data('id');
-    var photo = new Bettergram.Models.Photo({ id: id });
-    var that = this;
-    photo.collection = new Bettergram.Collections.Photos();
+    console.log(id);
+    var photo = Bettergram.photos.get(id);
+    console.log(photo);
     var $modal = $('.modal');
-    photo.fetch({
-      success: function () {
-        var showView = new Bettergram.Views.PhotoShow({ model: photo });
-        $modal.find('.modal-content').html(showView.render().$el);
-        $modal.modal();
-      }
-    });
+    var showView = new Bettergram.Views.PhotoShow({ model: photo });
+    $modal.find('.modal-content').html(showView.render().$el);
+    $modal.modal();
   },
 
   scrollHandler: function (event) {
-    if (document.body.scrollHeight == 
-        document.body.scrollTop +        
-        window.innerHeight) {
-      this.collection.fetch({
-        data: {max_id: 1},
-        reset: false
-      });
-    }
+    var scrollPos = $(window).scrollTop();
+    var scrollMax = $(document).height() - $(window).height();
+    var that = this;
+    if (scrollMax - scrollPos < 400) {
+      this.throttledFetch();
+    } 
   }
 });
