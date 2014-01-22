@@ -1,21 +1,17 @@
 Bettergram.Routers.UsersRouter = Backbone.Router.extend({
   initialize: function (options) {
     this.$rootEl = options.rootEl;
+    this.user = options.user;
   },
 
   routes: {
-    "users/:id": "userShow"
+    "user": "userShow"
   },
 
   userShow: function (id) {
-    var user = new Bettergram.Models.User({ id: id });
     var that = this;
-    user.fetch({
-      success: function () {
-        var showView = new Bettergram.Views.UserShow({ model: user });
-        that._swapView(showView);
-      }
-    });
+    var showView = new Bettergram.Views.UserShow({ model: this.user });
+    that._swapView(showView);
   },
 
   _swapView: function (view) {

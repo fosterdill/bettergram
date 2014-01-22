@@ -3,19 +3,11 @@ Bettergram.Routers.SearchRouter = Backbone.Router.extend({
     this.$rootEl = options.rootEl;
   },
 
-  events: {
-    "click #search-button": "performSearch"
-  },
-
   routes: {
-    "/search/:query": "loadResults"
-  },
-
-  performSearch: function (event) {
-    event.preventDefault();
-    alert('hi');
+    "search/:query": "loadResults"
   },
 
   loadResults: function (query) {
+    console.log(query);
   }
 });

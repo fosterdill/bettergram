@@ -6,7 +6,7 @@ Bettergram::Application.routes.draw do
   resources :users, :only => [:create, :new]
   namespace :api, :defaults => {:format => :json} do
     resources :photos, :only => [:index]
-    resources :users, :only => [:show]
+    resources :users, :only => [:index, :show]
     resources :comments, :only => [:create]
   end
 
