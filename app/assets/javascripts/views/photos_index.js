@@ -14,7 +14,7 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
       that.preloadImage(photo);
     });
     this.listenTo(this.collection, 'add', this.addPhoto);
-    this.throttledFetch = _.throttle(this.fetchPhotos.bind(this), 2000);
+    this.throttledFetch = _.throttle(this.fetchPhotos.bind(this), 1000);
   },
 
   fetchPhotos: function () {
