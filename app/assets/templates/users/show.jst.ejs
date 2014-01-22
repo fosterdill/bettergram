@@ -1,36 +1,40 @@
 <div class="jumbotron ">
   <div class="container user-show-font">
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <% user.get('posts').each(function (post, index) { %>
-          <li 
-            data-target="#carousel-example-generic" 
-            data-slide-to="<%= index %>" 
-            <% if(index === 0) { %>
-              <%= 'class="active"' %>
-            <% } %>></li>
-        <% }); %>
-      </ol>
+    <div class="row">
+      <div class="col-xs-4">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <!-- <ol class="carousel&#45;indicators"> -->
+          <!--   <% user.get('posts').each(function (post, index) { %> -->
+          <!--     <li  -->
+          <!--       data&#45;target="#carousel&#45;example&#45;generic"  -->
+          <!--       data&#45;slide&#45;to="<%= index %>"  -->
+          <!--       <% if(index === 0) { %> -->
+          <!--         <%= 'class="active"' %> -->
+          <!--       <% } %>></li> -->
+          <!--   <% }); %> -->
+          <!-- </ol> -->
 
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner">
-        <% user.get('posts').each(function (post, index) { %>
-          <div class="item <%= index === 0 ? 'active' : '' %> ">
-            <img src="<%= post.get('images').standard_resolution.url %>">
-            <div class="carousel-caption">
-            </div>
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" style="border-radius: 5px">
+            <% user.get('posts').each(function (post, index) { %>
+              <div class="item <%= index === 0 ? 'active' : '' %> ">
+                <img class="text-center" style="border-radius: 5px;width: 100%" src="<%= post.get('images').low_resolution.url %>">
+                <div class="carousel-caption">
+                </div>
+              </div>
+            <% }); %>
           </div>
-        <% }); %>
-      </div>
 
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>
+          <!-- Controls -->
+          <a class="left carousel-control" style="border-radius: 5px" href="#carousel-example-generic" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" style="border-radius: 5px" href="#carousel-example-generic" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

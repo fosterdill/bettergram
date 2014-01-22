@@ -11,14 +11,19 @@
  *= require_self
  *= require_tree .
  */
-$jumbotron-bg: rgba(5, 0, 0, .05);
+$jumbotron-bg: rgba(255, 255, 255, .5);
 $navbar-default-bg: #f1f7f6;
 $navbar-default-brand-hover-bg: #f9f9f7; 
 @import "bootstrap";
 body {
   margin-top: 70px;
-  background-image: url(debut_light.png);
+  background-image: url(pinstripe.png);
   background-repeat:repeat;
+}
+
+.carousel {
+  width: 320px;
+  height: 320px;
 }
 
 .user-show-font {

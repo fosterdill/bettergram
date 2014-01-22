@@ -7,6 +7,7 @@ Bettergram::Application.routes.draw do
   namespace :api, :defaults => {:format => :json} do
     resources :photos, :only => [:index, :show]
     resources :users, :only => [:show]
+    resources :comments, :only => [:create]
   end
 
   root :to => "root#index"
