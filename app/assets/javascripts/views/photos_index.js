@@ -3,39 +3,20 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
     'click img.rounded-picture': 'showPictureModal'
   },
 
+  template: JST['photos/index'],
+  
   initialize: function () {
     _.bindAll(this, 'scrollHandler');
     $(window).scroll(this.scrollHandler);
-
-    this.on('addPhotos', this.render);
-    this.rows = new Bettergram.Collections.Photos();
-    this.throttled = _.throttle(this.addPhotos.bind(this), 2000); 
   },
 
   render: function () {
-    var that = this;
-    this.$rowsEl = $('<div>');
-    this.collection.each(function (photo, index) {
-      that.rows.add(photo);
-      if (that.rows.length === 3) {
-        var rowView = new Bettergram.Views.PhotoRow({
-          collection: that.rows
-        });
-        that.$rowsEl.append(rowView.render().$el);
-        that.rows = new Bettergram.Collections.Photos();
-      }
-    });
-
-    this.$el.append(this.$rowsEl);
-    this.preloadImages();
+    var renderedContent = this.template({ photos: this.collection });
+    this.$el.html(renderedContent);
     return this;
   },
 
   preloadImages: function () {
-    this.collection.each(function (photo) {
-      var image = new Image();
-      image.src = photo.get('images').standard_resolution.url;
-    });
   },
 
   showPictureModal: function (event) {
@@ -55,21 +36,6 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
   },
 
   scrollHandler: function (event) {
-    var scrollPos = $(window).scrollTop();
-    var scrollMax = $(document).height() - $(window).height();
-    var that = this;
-    if (scrollMax - scrollPos < 400) {
-      this.throttled();
-    }
-  },
-
-  addPhotos: function () {
-    var that = this;
-    this.collection.fetch({
-      data: { max_id: 5 },
-      success: function () {
-        that.trigger('addPhotos');
-      }
-    });
+    console.log('scroll handles');
   }
 });

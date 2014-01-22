@@ -1,0 +1,7 @@
+<ul id="photos">
+  <% photos.each(function (photo, index) { %>
+    <li>
+      <img src="<%= photo.get('images').low_resolution.url %>">
+    </li>
+  <% }); %>
+</ul>
