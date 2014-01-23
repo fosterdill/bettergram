@@ -8,6 +8,7 @@ Bettergram::Application.routes.draw do
     resources :photos, :only => [:index]
     resources :users, :only => [:index, :show]
     resources :comments, :only => [:create]
+    resources :results, :only => [:index]
   end
 
   root :to => "root#index"
