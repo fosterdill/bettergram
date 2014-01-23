@@ -11,13 +11,13 @@
  *= require_self
  *= require_tree .
  */
-$jumbotron-bg: rgba(255, 255, 255, .5);
+$jumbotron-bg: rgba(255, 255, 255, .6);
 $navbar-default-bg: #f1f7f6;
 $navbar-default-brand-hover-bg: #f9f9f7; 
 @import "bootstrap";
 body {
   margin-top: 70px;
-  background-image: url(pinstripe.png);
+  background-image: url(light_grey.png);
   background-repeat:repeat;
 }
 
