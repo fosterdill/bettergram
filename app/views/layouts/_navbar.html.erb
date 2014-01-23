@@ -15,8 +15,10 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
-      <li><a href="/#/">Feed</a></li>
-      <li><a href="/#/">Profile</a></li>
+      <li id="feed-menu-button"><a href="/#/">Feed</a></li>
+      <% if has_client? %>
+        <li id="profile-menu-button"><a href="/#/users/<%= current_instagram_client.user.id %>">Profile</a></li>
+      <% end %>
       <!-- <li class="dropdown"> -->
       <!--   <a href="#" class="dropdown&#45;toggle" data&#45;toggle="dropdown">Dropdown <b class="caret"></b></a> -->
       <!--   <ul class="dropdown&#45;menu"> -->
@@ -33,9 +35,9 @@
     <ul class="nav navbar-nav navbar-right">
     <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
+        <input id="search-query" type="text" class="form-control" placeholder="Look for photos">
       </div>
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button id="search-button" type="submit" class="btn btn-default">Search</button>
     </form>
     <% if logged_in? %>
       <li class="dropdown">

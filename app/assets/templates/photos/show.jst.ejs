@@ -15,6 +15,20 @@
           <li><%= comment.get('from').username %>: <%= comment.get('text') %></li>
         </ul>
       <% }); %>
+    <form>
+      <input 
+        type="hidden" 
+        name="authenticity_token" 
+        value="<%= $('[name=csrf-token]').attr('content') %>">
+      <input
+        id="body-comment"
+        type="text"
+        name="comment">
+      <input
+        id="create-comment"
+        type="submit"
+        value="Comment">
+    </form>
     </div>
   </div>
 </div>

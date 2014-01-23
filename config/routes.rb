@@ -4,8 +4,11 @@ Bettergram::Application.routes.draw do
   get "oauth/connect" =>  "o_auth#connect", :as => :connect
   resource :session, :only => [:create, :new, :destroy]
   resources :users, :only => [:create, :new]
-  namespace :api do
-    resources :photos, :only => [:index, :show]
+  namespace :api, :defaults => {:format => :json} do
+    resources :photos, :only => [:index]
+    resources :users, :only => [:index, :show]
+    resources :comments, :only => [:create]
+    resources :results, :only => [:index]
   end
 
   root :to => "root#index"

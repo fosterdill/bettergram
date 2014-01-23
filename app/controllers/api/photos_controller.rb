@@ -1,16 +1,26 @@
 class Api::PhotosController < ApplicationController
   def index
+    session[:redis_token] ||= SecureRandom.urlsafe_base64
     if (has_client?)
-      options = params[:max_id] ? {:max_id => params[:max_id]} : {}
-      @photos = current_instagram_client.user_media_feed(options)
+      if (is_first_fetch?)
+        redis_key = 'photocache' + session[:redis_token]
+        cached_photos = REDIS.get(redis_key)
+        if (cached_photos.nil?)
+          @photos = current_instagram_client.user_media_feed().to_json
+          cache_photos(@photos)
+        else
+          @photos = cached_photos
+        end
+      else
+        @photos = current_instagram_client
+                    .user_media_feed(:max_id => params[:max_id])
+                    .to_json
+      end
+
     else
       @photos = current_instagram_client.media_popular
     end
-    render :json => @photos
-  end
 
-  def show
-    @photo = current_instagram_client.media_item(params[:id])
-    render :json => @photo
+    render :json => @photos
   end
 end

@@ -1,0 +1,42 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button 
+      type="button" 
+      class="navbar-toggle" 
+      data-toggle="collapse" 
+      data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#/">bettergram</a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+    <ul class="nav navbar-nav">
+      <li id="feed-menu-button"><a href="/#/">Feed</a></li>
+      <li id="profile-menu-button"><a href="/#/user">Profile</a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        <input id="search-query" type="text" rel="popover" class="form-control" placeholder="Find users">
+      </div>
+      <button id="search-button" type="submit" class="btn btn-default">Search</button>
+    </form>
+
+      <li class="dropdown">
+      <% console.log(user) %>
+      <a id="profile-picture-container" href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <img class="img-circle" id="profile-picture" src="<%= user.get('profile_picture') %>">
+        <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+        </ul>
+      </li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>

@@ -11,13 +11,44 @@
  *= require_self
  *= require_tree .
  */
+$jumbotron-bg: rgba(255, 255, 255, .6);
 $navbar-default-bg: #f1f7f6;
 $navbar-default-brand-hover-bg: #f9f9f7; 
 @import "bootstrap";
 body {
   margin-top: 70px;
-  background-image: url(debut_light.png);
+  background-image: url(light_grey.png);
   background-repeat:repeat;
+}
+
+.user-show-image {
+  margin: 4px;
+}
+
+.popover-content {
+  padding: 0px;
+}
+.popover {
+  box-shadow: 0px 0px 0px 0px;
+  background-color: #f1f7f6;
+}
+.popover-content a {
+  padding: 0px;
+  margin: 0px;
+}
+
+.carousel {
+  width: 320px;
+  height: 320px;
+}
+
+.user-show-list {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.user-show-font {
+  font-family: "Duru Sans";
 }
 
 .modal {

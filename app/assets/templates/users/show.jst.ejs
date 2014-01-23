@@ -1,0 +1,19 @@
+<div class="jumbotron ">
+  <div class="container user-show-font">
+    <div class="row">
+      <div class="col-xs-3" style="position:fixed">
+        <h1><%= user.get('username') %></h1>
+        <img class="img-rounded" src="<%= user.get('profile_picture') %>">
+        <ul class="user-show-list">
+          <li><h3>Followers: <%= user.get('counts').followed_by %></h3></li>
+          <li><h3>Following: <%= user.get('counts').follows %></h3></li>
+          <li><h3>Posted Photos: <%= user.get('counts').media %></h3></li>
+        </ul>
+      </div>
+      <div class="col-xs-offset-4 col-xs-8">
+        <div id="user-photos">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
