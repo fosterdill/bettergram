@@ -14,6 +14,10 @@ Bettergram.Views.NavShow = Backbone.View.extend({
   performSearch: function (event) {
     event.preventDefault();
     var query = this.$('#search-query').val();
-    Backbone.history.navigate("/search/" + encodeURI(query), { trigger: true });
+    this.$('#search-query').val('');
+    Backbone.history.navigate(
+      "#/search/" + encodeURI(query), 
+      { trigger: true }
+    );
   }
 });
