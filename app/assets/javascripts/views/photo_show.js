@@ -3,6 +3,14 @@ Bettergram.Views.PhotoShow = Backbone.View.extend({
     "click #create-comment": "addComment"
   },
 
+  initialize: function () {
+    this.listenTo(this.model.get('comments'), 'add', this.render);
+  },
+
+  appendComment: function (comment) {
+    $('#comments-list').append('<li>' + comment.get('body') + '</li>');
+  },
+
   template: JST['photos/show'],
 
   render: function () {
@@ -14,18 +22,13 @@ Bettergram.Views.PhotoShow = Backbone.View.extend({
   addComment: function (event) {
     event.preventDefault();
     var id = this.model.id;
+    var that = this;
     var message = $('#body-comment').val();
     var comment = new Bettergram.Models.Comment();
-    comment.collection = new Bettergram.Collections.Comments();
-    comment.save({ media_id: id, text: message }, {
-      success: function (data) {
-        console.log('success!');
-        console.log(data);
-      },
-
-      error: function (data) {
-        console.log('problem');
-        console.log(data);
+    comment.collection = this.model.get('comments');
+    comment.save({ media_id: id, body: message }, {
+      success: function () {
+        that.model.get('comments').add(comment);
       }
     });
   }

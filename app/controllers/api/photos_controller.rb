@@ -1,3 +1,4 @@
+require 'pp'
 class Api::PhotosController < ApplicationController
   def index
     session[:redis_token] ||= SecureRandom.urlsafe_base64
@@ -21,6 +22,27 @@ class Api::PhotosController < ApplicationController
       @photos = current_instagram_client.media_popular
     end
 
-    render :json => @photos
+    photo_ids = []
+    photos = JSON.parse(@photos)
+
+    photos.each do |photo|
+      photo_ids << photo['id']
+    end
+
+    comments = Comment.find_by_sql([<<-SQL, photo_ids])
+      SELECT
+        *
+      FROM
+        comments
+      WHERE
+        comments.media_id IN (?)
+    SQL
+
+    photos.map do |obj|
+      obj[:comments] = comments.select do |comment| 
+        comment.media_id == obj['id']
+      end
+    end
+    render :json => photos
   end
 end

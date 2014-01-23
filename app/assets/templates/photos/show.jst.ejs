@@ -10,11 +10,12 @@
     </div>
     <div id="comment-area" class=" col-xs-5 col-xs-offset-1">
       <h2>Comments (<%= photo.get('comments').length %>):</h2>
-      <% photo.get('comments').each(function (comment) { %>
-        <ul>
-          <li><%= comment.get('from').username %>: <%= comment.get('text') %></li>
-        </ul>
-      <% }); %>
+      <% console.log(photo) %>
+      <ul id="comments-list">
+        <% photo.get('comments').each(function (comment) { %>
+            <li><%= comment.get('body') %></li>
+        <% }); %>
+      </ul>
     <form>
       <input 
         type="hidden" 

@@ -1,9 +1,16 @@
 class Api::CommentsController < ApplicationController
   def create
-    @comment = current_instagram_client.create_media_comment(
-      params[:media_id], 
-      params[:text]
+    @comment = Comment.new(
+      :media_id => params[:media_id],
+      :user_id => JSON.parse(
+        REDIS.get('user_info' + session[:redis_token])
+      )['id'],
+      :body => params[:body]
     )
-    render :json => @comment
+    if @comment.save
+      render :json => @comment
+    else
+      render :json => @comment.errors, :status => 422
+    end
   end
 end
