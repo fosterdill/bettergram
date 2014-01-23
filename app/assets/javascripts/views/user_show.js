@@ -25,6 +25,7 @@ Bettergram.Views.UserShow = Backbone.View.extend({
       image.addClass('user-show-image');
       image.removeClass('img-margin');
       that.$userPhotosRoot.append(imageListItem);
+      that.preloadImage(photo);
     });
     return this;
   },
@@ -41,4 +42,9 @@ Bettergram.Views.UserShow = Backbone.View.extend({
     this.$modal.find('.modal-content').html(showView.render().$el);
     this.$modal.modal();
   },
+
+  preloadImage: function (photo) {
+    var image = new Image();
+    image.src = photo.get('images').standard_resolution.url;
+  }
 });
