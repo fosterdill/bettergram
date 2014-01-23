@@ -4,22 +4,20 @@ Bettergram.Routers.SearchRouter = Backbone.Router.extend({
   },
 
   routes: {
-    "search/:type/:query": "loadResults"
+    "search/:query": "loadResults"
   },
 
-  loadResults: function (type, query) {
+  loadResults: function (query) {
     var that = this;
     var result = new Bettergram.Models.Result();
     result.collection = new Bettergram.Collections.Results();
     result.fetch({
       data: { 
-        type: type,
         query: query 
       },
       success: function (result) {
         var resultsView = new Bettergram.Views.ResultsIndex({
           model: result,
-          type: type,
           query: query
         });
         that._swapView(resultsView);
