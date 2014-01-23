@@ -10,13 +10,14 @@ img#profile-picture {
   padding-left:10px;
 }
 .navbar-brand {
-   font-family: 'Averia Sans Libre', cursive; 
+   font-family: 'Rosarivo', cursive; 
+   font-weight: bold;
    background: #f7f7f7;
    font-size: 16pt;
    border-right: 1px grey solid;
 }
 .navbar {
-  font-family: 'Averia Sans Libre', cursive; 
+  font-family: 'Duru Sans', cursive; 
   font-size: 12pt;
   box-shadow: 0px 0px 5px grey;
 }

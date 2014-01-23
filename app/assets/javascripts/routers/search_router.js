@@ -15,7 +15,7 @@ Bettergram.Routers.SearchRouter = Backbone.Router.extend({
       data: { 
         query: query 
       },
-      success: function (result) {
+      success: function () {
         var resultsView = new Bettergram.Views.ResultsIndex({
           model: result,
           query: query

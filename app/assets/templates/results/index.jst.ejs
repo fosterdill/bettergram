@@ -1,2 +1,4 @@
-<% console.log(result) %>
-<h1> users like <%= query %></h1>
+<% result.get('users').each(function (user) { %>
+  <img src="<%= user.get('profile_picture') %>">
+  <%= user.get('username') %>
+<% }); %>
