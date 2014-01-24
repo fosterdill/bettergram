@@ -68,6 +68,11 @@ Bettergram.Views.PhotoShow = Backbone.View.extend({
     comment.save({ media_id: id, body: message }, {
       success: function () {
         var photoInPhotos = Bettergram.photos.get(id);
+        var photoInUser = Bettergram.user.get('posts').get(id);
+        if (photoInPhotos)
+          photoInPhotos.get('comments').add(comment);
+        if (photoInUser)
+          photoInUser.get('comments').add(comment);
       }
     });
   }
