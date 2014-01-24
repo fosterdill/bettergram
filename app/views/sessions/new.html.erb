@@ -1,3 +1,10 @@
-<h1> Sign In </h1>
-<%= render 'layouts/login', :url => session_url, :button_name => "Sign In" %>
-<a href="<%= new_user_url %>">Sign Up</a>
+<div class="jumbotron session">
+  <div class="row">
+    <div class="text-center col-xs-offset-4 col-xs-4">
+      <div class="text-center page-header login-header">
+        <h1>bettergram</h1>
+      </div>
+      <%= render 'layouts/login', :url => session_url, :button_name => "Sign In" %>
+    </div>
+  </div>
+</div>

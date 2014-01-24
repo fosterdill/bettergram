@@ -4,18 +4,50 @@
     name="authenticity_token" 
     value="<%= form_authenticity_token %>">
 
-  <label for="user_username">Username</label>
-  <input 
-    type="text" 
-    name="user[username]" 
-    id="user_username" 
-    value="<%= @user.username %>" />
+  <div class="form-group">
+    <input 
+      class="form-control"
+      placeholder="Username"
+      type="text" 
+      name="user[username]" 
+      id="user_username" 
+      value="<%= @user.username %>" />
+  </div>
 
-  <label for="user_password">Password</label>
+  <div class="form-group">
+    <input 
+      placeholder="Password"
+      class="form-control"
+      type="password" 
+      name="user[password]" 
+      id="user_password" />
+  </div>
+  <div class="form-group text-center">
+    <input class="btn btn-default" type="submit" value="<%= button_name %>" />
+  </div>
+</form>
+<form action="<%= url %>" method="POST">
   <input 
-    type="password" 
-    name="user[password]" 
-    id="user_password" />
+    type="hidden" 
+    name="authenticity_token" 
+    value="<%= form_authenticity_token %>">
 
-  <input type="submit" value="<%= button_name %>" />
+    <input 
+      class="form-control"
+      placeholder="Username"
+      type="hidden" 
+      name="user[username]" 
+      id="user_username" 
+      value="dylan" />
+
+    <input 
+      placeholder="Password"
+      class="form-control"
+      value="password"
+      type="hidden" 
+      name="user[password]" 
+      id="user_password" />
+      <div class="text-center">
+        <input class="btn btn-success" type="submit" value="Login as guest" />
+      </div>
 </form>

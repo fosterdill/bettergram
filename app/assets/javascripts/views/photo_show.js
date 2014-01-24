@@ -2,7 +2,7 @@ Bettergram.Views.PhotoShow = Backbone.View.extend({
   events: {
     "click #create-comment": "addComment",
     "click #like": "likePhoto",
-    "click #unlike": "unlikePhoto"
+    "click #unlike": "likePhoto"
   },
 
   initialize: function () {
@@ -10,31 +10,37 @@ Bettergram.Views.PhotoShow = Backbone.View.extend({
   },
 
   likePhoto: function (event) {
-    event.preventDefault();
-    var like = new Bettergram.Models.Like();
-    like.save({ media_id: this.model.id }, {
-      success: function () {
-        console.log('success');
-      },
+    if ($('#like').hasClass('liked')) {
+      $('#like').removeClass('liked');
+    } else {
+      $('#like').addClass('liked');
+    }
+    // var like = new Bettergram.Models.Like();
+    // like.save({ media_id: this.model.id }, {
+    //   success: function () {
+    //     console.log('success');
+    //   },
 
-      error: function (error) {
-        console.log(error);
-      }
-    });
+    //   error: function (error) {
+    //     console.log(error);
+    //   }
+    // });
   },
 
   unlikePhoto: function (event) {
     event.preventDefault();
-    var like = new Bettergram.Models.Like();
-    like.destroy({ media_id: this.model.id }, {
-      success: function () {
-        console.log('success');
-      },
+    $('#unlike').hide();
+    $('#comment-area').prepend(' <button id="like" type="button" class="btn btn-default btn-lg"> <span class="glyphicon glyphicon-heart"></span> Like </button> ');
+    // var like = new Bettergram.Models.Like();
+    // like.destroy({ media_id: this.model.id }, {
+    //   success: function () {
+    //     console.log('success');
+    //   },
 
-      error: function (error) {
-        console.log(error);
-      }
-    });
+    //   error: function (error) {
+    //     console.log(error);
+    //   }
+    // });
   },
 
   appendComment: function (comment) {

@@ -1,3 +1,3 @@
 Bettergram.Models.Like = Backbone.Model.extend({
-  urlRoot: '/api/likes'
+  url: '/api/like'
 });
