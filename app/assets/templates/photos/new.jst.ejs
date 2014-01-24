@@ -1,0 +1,7 @@
+<form>
+  <input 
+    type="hidden" 
+    name="authenticity_token" 
+    value="<%= $('meta[name=csrf-token]').attr('content')  %>">
+  <input class="btn btn-default" type="submit" value="Upload">
+</form>

@@ -1,10 +1,40 @@
 Bettergram.Views.PhotoShow = Backbone.View.extend({
   events: {
-    "click #create-comment": "addComment"
+    "click #create-comment": "addComment",
+    "click #like": "likePhoto",
+    "click #unlike": "unlikePhoto"
   },
 
   initialize: function () {
     this.listenTo(this.model.get('comments'), 'add', this.render);
+  },
+
+  likePhoto: function (event) {
+    event.preventDefault();
+    var like = new Bettergram.Models.Like();
+    like.save({ media_id: this.model.id }, {
+      success: function () {
+        console.log('success');
+      },
+
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  },
+
+  unlikePhoto: function (event) {
+    event.preventDefault();
+    var like = new Bettergram.Models.Like();
+    like.destroy({ media_id: this.model.id }, {
+      success: function () {
+        console.log('success');
+      },
+
+      error: function (error) {
+        console.log(error);
+      }
+    });
   },
 
   appendComment: function (comment) {
@@ -14,7 +44,10 @@ Bettergram.Views.PhotoShow = Backbone.View.extend({
   template: JST['photos/show'],
 
   render: function () {
-    var renderedContent = this.template({photo: this.model});
+    var renderedContent = this.template({
+      photo: this.model,
+      current_user: Bettergram.user
+    });
     this.$el.html(renderedContent);
     return this;
   },
@@ -25,10 +58,16 @@ Bettergram.Views.PhotoShow = Backbone.View.extend({
     var that = this;
     var message = $('#body-comment').val();
     var comment = new Bettergram.Models.Comment();
+    if (!this.model.get('comments').models) {
+      this.model.set(
+        'comments',
+        new Bettergram.Collections.Comments(this.model.get('comments'))
+      )
+    }
     comment.collection = this.model.get('comments');
     comment.save({ media_id: id, body: message }, {
       success: function () {
-        that.model.get('comments').add(comment);
+        var photoInPhotos = Bettergram.photos.get(id);
       }
     });
   }

@@ -5,7 +5,10 @@ class Api::CommentsController < ApplicationController
       :user_id => JSON.parse(
         REDIS.get('user_info' + session[:redis_token])
       )['id'],
-      :body => params[:body]
+      :body => params[:body],
+      :username => JSON.parse(
+        REDIS.get('user_info' + session[:redis_token])
+      )['username']
     )
     if @comment.save
       render :json => @comment

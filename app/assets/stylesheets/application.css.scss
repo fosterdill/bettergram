@@ -21,6 +21,26 @@ body {
   background-repeat:repeat;
 }
 
+.photo-overlay {
+}
+
+#overlay {  
+  background:rgba(33,0,0,1);
+  text-align:center;
+  padding:45px 0 66px 0;
+  opacity:0;
+  -webkit-transition: opacity .25s ease;
+}
+
+#box:hover overlay {
+  opacity:1;
+}
+.underlined {
+  border-bottom: 3px solid grey;
+  font-size: 30pt;
+  margin-bottom: 15px;
+}
+
 .user-show-image {
   margin: 4px;
 }

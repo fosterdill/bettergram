@@ -10,6 +10,7 @@ Bettergram.Routers.SearchRouter = Backbone.Router.extend({
   loadResults: function (query) {
     var that = this;
     var result = new Bettergram.Models.Result();
+    $('#menu-buttons li').removeClass('active');
     result.collection = new Bettergram.Collections.Results();
     result.fetch({
       data: { 

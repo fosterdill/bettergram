@@ -5,19 +5,25 @@ Bettergram.Routers.PhotosRouter = Backbone.Router.extend({
 
   routes: {
     "": "photosIndex",
+    "photos/new": "photoNew",
     "photos/:id": "photoShow"
   },
 
   photosIndex: function () {
     var that = this;
     Bettergram.photos.fetch({
-      success: function () {
+      success: function (photos) {
         var photosIndex = new Bettergram.Views.PhotosIndex({ 
-          collection: Bettergram.photos
+          collection: photos
         });
         that._swapView(photosIndex);
       }
     });
+  },
+
+  photoNew: function () {
+    var newView = new Bettergram.Views.PhotoNew();
+    this._swapView(newView);
   },
 
   photoShow: function (id) {

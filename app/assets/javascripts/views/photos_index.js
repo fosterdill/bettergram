@@ -16,7 +16,6 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
 
   fetchPhotos: function () {
     var lastId = this.collection.last().get('id');
-    console.log(lastId);
     this.collection.fetch({
       data: { max_id: lastId },
       remove: false
@@ -48,6 +47,12 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
     event.preventDefault();
     var id = $(event.target).data('id');
     var photo = Bettergram.photos.get(id);
+    if (!photo.get('comments').models) {
+      photo.set(
+        'comments',
+        new Bettergram.Collections.Comments(photo.get('comments'))
+      )
+    }
     var showView = new Bettergram.Views.PhotoShow({ model: photo });
     this.$modal.find('.modal-content').html(showView.render().$el);
     this.$modal.modal();
