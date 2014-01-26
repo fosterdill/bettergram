@@ -1,4 +1,6 @@
+<ul id="results">
 <% result.get('users').each(function (user) { %>
-  <a href="#/users/<%= user.get('id') %>"> <img src="<%= user.get('profile_picture') %>"></a>
-  <%= user.get('username') %>
+  <li><a href="#/users/<%= user.get('id') %>"> <img src="<%= user.get('profile_picture') %>"></a>
+  <%= user.get('username') %></li>
 <% }); %>
+</ul>

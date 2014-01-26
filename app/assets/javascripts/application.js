@@ -22,3 +22,6 @@
 //= require_tree ./views
 //= require_tree ./routers
 //= require_tree .
+$(function () {
+ <script type="text/javascript" src="jquery.wookmark.js"></script> 
+});
