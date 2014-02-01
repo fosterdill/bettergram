@@ -1,5 +1,9 @@
 class Api::CommentsController < ApplicationController
   def create
+    # user_id = JSON.parse(
+    # )['id']
+    # p user_id
+    #
     @comment = Comment.new(
       :media_id => params[:media_id],
       :user_id => JSON.parse(
