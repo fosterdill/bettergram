@@ -14,7 +14,17 @@ Bettergram.Routers.UsersRouter = Backbone.Router.extend({
       var showView = new Bettergram.Views.UserShow({ model: this.user });
       this._swapView(showView);
     } else {
-      console.log('nothing set up yet');
+      var that = this;
+      var user = new Bettergram.Models.User();
+      user.urlRoot = 'api/users';
+      user.id = id;
+      user.fetch({
+        success: function (data) {
+          console.log(data);
+          var showView = new Bettergram.Views.UserShow({ model: data });
+          that._swapView(showView);
+        }
+      });
     }
   },
 

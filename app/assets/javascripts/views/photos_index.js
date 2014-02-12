@@ -32,7 +32,6 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
   },
 
   addPhoto: function (photo) {
-    console.log('photo added to collection');
     var detailView = new Bettergram.Views.PhotoDetail({ model: photo });
     this.$ul.append(detailView.render().$el);
     this.preloadImage(photo);
