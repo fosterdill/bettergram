@@ -1,18 +1,11 @@
 class Api::CommentsController < ApplicationController
   def create
-    # user_id = JSON.parse(
-    # )['id']
-    # p user_id
-    #
+    cached_info = JSON.parse( REDIS.get('user_info' + session[:redis_token]) )
     @comment = Comment.new(
       :media_id => params[:media_id],
-      :user_id => JSON.parse(
-        REDIS.get('user_info' + session[:redis_token])
-      )['id'],
+      :user_id => cached_info['id'],
       :body => params[:body],
-      :username => JSON.parse(
-        REDIS.get('user_info' + session[:redis_token])
-      )['username']
+      :username => cached_info['username']
     )
     if @comment.save
       render :json => @comment

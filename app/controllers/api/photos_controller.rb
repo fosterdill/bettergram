@@ -1,4 +1,3 @@
-require 'pp'
 class Api::PhotosController < ApplicationController
   def index
     session[:redis_token] ||= SecureRandom.urlsafe_base64
