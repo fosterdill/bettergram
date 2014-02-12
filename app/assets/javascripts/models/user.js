@@ -1,5 +1,5 @@
 Bettergram.Models.User = Backbone.Model.extend({
-  urlRoot: 'api/users',
+  urlRoot: 'api/user',
 
   parse: function (data) {
     var posts = data.posts;

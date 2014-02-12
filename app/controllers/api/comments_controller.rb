@@ -1,5 +1,6 @@
 class Api::CommentsController < ApplicationController
   def create
+    p 'user_info' + session[:redis_token]
     cached_info = JSON.parse( REDIS.get('user_info' + session[:redis_token]) )
     @comment = Comment.new(
       :media_id => params[:media_id],
