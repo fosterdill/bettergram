@@ -11,7 +11,7 @@ Bettergram.Views.PhotosIndex = Backbone.View.extend({
     this.$modal = $('.modal');
     this.$ul = $('<ul id="photos">');
     this.listenTo(this.collection, 'add', this.addPhoto);
-    this.throttledFetch = _.throttle(this.fetchPhotos.bind(this), 2000);
+    this.throttledFetch = _.throttle(this.fetchPhotos.bind(this), 2000, {trailing: false});
   },
 
   fetchPhotos: function () {
