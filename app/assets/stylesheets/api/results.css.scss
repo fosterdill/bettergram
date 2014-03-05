@@ -1,3 +1,38 @@
 // Place all the styles related to the Api::Results controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#results {
+  list-style-type: none;
+}
+
+.result-img {
+  border-radius: 20%;
+  -webkit-transition: opacity 500ms;
+}
+
+.result-container:hover  .result-img {
+  opacity: .3;
+}
+
+.result-container:hover .result-user {
+  opacity: 1;
+}
+
+.result-container {
+  font-family: 'Duru Sans';
+  margin: 10px;
+  position: relative;
+  float: left;
+}
+
+.result-user {
+  -webkit-transition: opacity 500ms;
+  font-weight: 900;
+  width: 100%;
+  text-shadow: 0px 0px 2px black;
+  position: absolute;
+  text-align: center;
+  top: 48%;
+  cursor: pointer;
+  opacity: 0;
+}
