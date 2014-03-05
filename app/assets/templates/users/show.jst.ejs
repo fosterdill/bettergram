@@ -3,13 +3,13 @@
       <div class="col-xs-3" style="position:fixed">
         <div class="underlined"><%= user.get('username') %></div>
         <img class="img-rounded" src="<%= user.get('profile_picture') %>">
-        <ul class="user-show-list">
           <a 
             data-id="<%= user.get('id') %>"  
             class="<%= followData %>" 
             href='#'>
-            <%= followData %>
+            <%= followData.charAt(0).toUpperCase() + followData.slice(1) %>
           </a>
+        <ul class="user-show-list">
           <li><h3>Followers: <%= user.get('counts').followed_by %></h3></li>
           <li><h3>Following: <%= user.get('counts').follows %></h3></li>
           <li><h3>Posted Photos: <%= user.get('counts').media %></h3></li>

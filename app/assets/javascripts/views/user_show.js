@@ -13,14 +13,16 @@ Bettergram.Views.UserShow = Backbone.View.extend({
   
   render: function () {
     var that = this;
-    var followStatus = this.model.get('following').outgoing_status;
-    var followData = (followStatus === 'follows' ? 'unfollow' : 'follow');
+    if (Bettergram.user.get('id') != this.model.get('id')) {
+      var followStatus = this.model.get('following').outgoing_status;
+      var followData = (followStatus === 'follows' ? 'unfollow' : 'follow');
+    }
 
     $('li.active').removeClass('active');
     $('#profile-menu-button').addClass('active');
     var renderedContent = this.template({ 
       user: this.model,
-      followData: followData,
+      followData: followData || '',
     });
     this.$el.html(renderedContent);
 
@@ -48,7 +50,7 @@ Bettergram.Views.UserShow = Backbone.View.extend({
         var $follow = $('.follow');
         $follow.addClass('unfollow');
         $follow.removeClass('follow');
-        $follow.text('unfollow');
+        $follow.text('Unfollow');
       }
     });
   },
@@ -62,7 +64,7 @@ Bettergram.Views.UserShow = Backbone.View.extend({
         var $unfollow = $('.unfollow');
         $unfollow.addClass('follow');
         $unfollow.removeClass('unfollow');
-        $unfollow.text('follow');
+        $unfollow.text('Follow');
       }
     });
   },
