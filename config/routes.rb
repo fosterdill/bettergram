@@ -11,6 +11,7 @@ Bettergram::Application.routes.draw do
     resources :users, :only => [:show]
     resources :comments, :only => [:create]
     resources :results, :only => [:index]
+    resources :follows, :only => [:create, :destroy]
   end
 
   root :to => "root#index"

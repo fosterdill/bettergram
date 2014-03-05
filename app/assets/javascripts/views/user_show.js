@@ -6,14 +6,22 @@ Bettergram.Views.UserShow = Backbone.View.extend({
   },
   
   events: {
-    'click .img-thumbnail': 'showPictureModal'
+    'click .img-thumbnail': 'showPictureModal',
+    'click .follow': 'followUser',
+    'click .unfollow': 'unFollowUser'
   },
   
   render: function () {
     var that = this;
+    var followStatus = this.model.get('following').outgoing_status;
+    var followData = (followStatus === 'follows' ? 'unfollow' : 'follow');
+
     $('li.active').removeClass('active');
     $('#profile-menu-button').addClass('active');
-    var renderedContent = this.template({ user: this.model });
+    var renderedContent = this.template({ 
+      user: this.model,
+      followData: followData,
+    });
     this.$el.html(renderedContent);
 
     this.$userPhotosRoot = $(this.$el).find('#user-photos');
@@ -29,6 +37,34 @@ Bettergram.Views.UserShow = Backbone.View.extend({
       that.preloadImage(photo);
     });
     return this;
+  },
+
+  followUser: function (event) {
+    event.preventDefault();
+    var userId = $(event.target).data('id');
+    var follow = new Bettergram.Models.Follow();
+    follow.save({ user_id: userId }, {
+      success: function (data) {
+        var $follow = $('.follow');
+        $follow.addClass('unfollow');
+        $follow.removeClass('follow');
+        $follow.text('unfollow');
+      }
+    });
+  },
+
+  unFollowUser: function (event) {
+    event.preventDefault();
+    var userId = $(event.target).data('id');
+    var follow = new Bettergram.Models.Follow({ id: userId });
+    follow.destroy({
+      success: function () {
+        var $unfollow = $('.unfollow');
+        $unfollow.addClass('follow');
+        $unfollow.removeClass('unfollow');
+        $unfollow.text('follow');
+      }
+    });
   },
 
   showPictureModal: function (event) {

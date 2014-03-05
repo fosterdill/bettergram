@@ -20,7 +20,6 @@ Bettergram.Routers.UsersRouter = Backbone.Router.extend({
       user.id = id;
       user.fetch({
         success: function (data) {
-          console.log(data);
           var showView = new Bettergram.Views.UserShow({ model: data });
           that._swapView(showView);
         }

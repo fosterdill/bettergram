@@ -9,6 +9,8 @@ class Api::UsersController < ApplicationController
       @user = current_instagram_client.user(params[:id])
       @user[:posts] = current_instagram_client.user_recent_media(params[:id]);
       @user[:posts] = get_photo_comments @user[:posts].to_json
+      @user[:following] = 
+        current_instagram_client.user_relationship(params[:id])
       render :json => @user
     end
   end
