@@ -1,6 +1,6 @@
 <li class="picture-list-item">
 <div class="photo-container pull-left text-center">
-  <p class="photo-header"><a href="#"><%= photo.get('user').username%></a></p>
+  <p class="photo-header"><a href="#/users/<%= photo.get('user').id %>"><%= photo.get('user').username%></a></p>
   <a href="#">
     <img 
       data-id="<%= photo.id %>" 
