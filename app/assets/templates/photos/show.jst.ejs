@@ -13,7 +13,19 @@
         <span class="glyphicon glyphicon-heart"></span>
       </button> 
       <br>
-      <h2>Comments (<%= photo.get('comments').length %>):</h2>
+      <h4><%= photo.get('caption').text %></h4>
+      <h2> Likes </h2>
+      <ul class="likes">
+        <% photo.get('likes').data.forEach(function (user, index) { %>
+          <li class="like">
+          <a data-picture-link="<%= user.profile_picture %>" class="user-link" href="#/users/<%= user.id %>"><%= user.username %></a><% if (index !== photo.get('likes').data.length - 1) { %>,&nbsp<% } %>
+          </li>
+        <% }); %>
+      </ul>
+      <br>
+      <div class="image-preview">
+      </div>
+      <h2>Comments </h2>
       <ul id="comments-list">
         <% photo.get('comments').each(function (comment) { %>
           <li>

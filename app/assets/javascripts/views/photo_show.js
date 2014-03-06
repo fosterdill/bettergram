@@ -2,11 +2,32 @@ Bettergram.Views.PhotoShow = Backbone.View.extend({
   events: {
     "click #create-comment": "addComment",
     "click #like": "likePhoto",
-    "click #unlike": "likePhoto"
+    "click #unlike": "likePhoto",
+    "click .user-link": "close",
+    "mouseover .user-link": "previewUserImage",
+    "mouseout .user-link": "clearUserImage"
   },
 
   initialize: function () {
     this.listenTo(this.model.get('comments'), 'add', this.render);
+  },
+
+  previewUserImage: function (event) {
+    var imageLink = $(event.target).data('picture-link');
+    var userImagePreview = new Bettergram.Views.UserImagePreview({ 
+      link: imageLink
+    });
+    var $imageDiv = $('.image-preview');
+    $imageDiv.css('left', $(event.target).position().left);
+    $imageDiv.html(userImagePreview.render().$el);
+  },
+
+  clearUserImage: function () {
+    $('.image-preview').html('');
+  },
+
+  close: function () {
+    $('.modal').modal('hide');
   },
 
   likePhoto: function (event) {

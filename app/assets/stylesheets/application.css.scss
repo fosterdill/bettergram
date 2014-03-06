@@ -15,6 +15,10 @@ $jumbotron-bg: rgba(255, 255, 255, .6);
 $navbar-default-bg: #f1f7f6;
 $navbar-default-brand-hover-bg: #f9f9f7; 
 @import "bootstrap";
+
+.image-preview {
+  position: absolute;
+}
 body {
   margin-top: 70px;
   background-image: url(light_grey.png);
@@ -22,6 +26,10 @@ body {
 }
 
 .photo-overlay {
+}
+
+#comments-list {
+  list-style-type: none;
 }
 
 .login-header {
