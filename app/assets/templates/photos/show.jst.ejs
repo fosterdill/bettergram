@@ -13,7 +13,11 @@
         <span class="glyphicon glyphicon-heart"></span>
       </button> 
       <br>
-      <h4><%= photo.get('caption').text %></h4>
+      <h4>
+        <% if (photo.get('caption')) { %>
+          <%= photo.get('caption').text %>
+        <% } %>
+      </h4>
       <h2> Likes </h2>
       <ul class="likes">
         <% photo.get('likes').data.forEach(function (user, index) { %>

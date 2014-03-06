@@ -19,6 +19,7 @@ Bettergram.Views.PhotoShow = Backbone.View.extend({
     });
     var $imageDiv = $('.image-preview');
     $imageDiv.css('left', $(event.target).position().left);
+    $imageDiv.css('top', $(event.target).position().top + 20);
     $imageDiv.html(userImagePreview.render().$el);
   },
 
