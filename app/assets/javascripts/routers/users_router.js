@@ -20,8 +20,17 @@ Bettergram.Routers.UsersRouter = Backbone.Router.extend({
       user.id = id;
       user.fetch({
         success: function (data) {
-          var showView = new Bettergram.Views.UserShow({ model: data });
-          that._swapView(showView);
+          if (data.get('errors') == undefined) {
+            var showView = new Bettergram.Views.UserShow({ model: data });
+            that._swapView(showView);
+          } else {
+            var errorHtml = '<div class="alert alert-warning' + 
+              ' alert-dismissable"> <button type="button" class="close"' + 
+              ' data-dismiss="alert" aria-hidden="true">&times;</button>' + 
+              data.get('errors') + '.  </div>';
+            $results = $('nav.navbar');
+            $('#content').prepend(errorHtml);
+          }
         }
       });
     }
