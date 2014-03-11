@@ -28,8 +28,8 @@ Bettergram.Routers.UsersRouter = Backbone.Router.extend({
               ' alert-dismissable"> <button type="button" class="close"' + 
               ' data-dismiss="alert" aria-hidden="true">&times;</button>' + 
               data.get('errors') + '.  </div>';
-            $results = $('nav.navbar');
             $('#content').prepend(errorHtml);
+            $(document).scrollTop(0);
           }
         }
       });
